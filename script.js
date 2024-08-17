@@ -1,13 +1,13 @@
 // Fetch calendar data from GitHub
 const fetchCalendarData = async () => {
-    const url = 'https://github.com/vtmduyen2501/mycalendar2024/blob/main/calendar.json'; // URL to your JSON file
+    const url = 'https://raw.githubusercontent.com/vtmduyen2501/mycalendar2024/main/calendar.json';
     try {
         const response = await fetch(url);
         if (!response.ok) {
             throw new Error('Failed to fetch calendar data');
         }
         const data = await response.json();
-        renderCalendar(data); // Call renderCalendar with fetched data
+        renderCalendar(data);
     } catch (error) {
         console.error('Error fetching calendar data:', error);
     }
@@ -76,7 +76,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     noteDiv.classList.add('note');
                     dayDiv.appendChild(noteDiv);
 
-                    // Retrieve data from fetched data (replace with actual data structure)
                     const dateKey = `${year}-${currentMonth + 1}-${currentDay}`;
                     const savedData = data[dateKey];
                     if (savedData) {
@@ -111,15 +110,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (selectedDay) {
             const noteContent = noteInput.value.replace(/\n/g, '<br>');
             selectedDay.querySelector('.note').innerHTML = noteContent;
-            
-            const dateKey = selectedDay.dataset.date;
-            const color = selectedDay.style.backgroundColor;
-            const note = noteContent;
-
-            // In a real application, you would save the data back to GitHub using API or manual push
-            console.log(`Save data for ${dateKey}: Color - ${color}, Note - ${note}`);
+            modal.style.display = 'none';
         }
-        modal.style.display = 'none';
     });
 
     window.addEventListener('click', (event) => {
@@ -129,14 +121,4 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     fetchCalendarData(); // Fetch calendar data when DOM is loaded
-
-    // Function to handle color selection (to be integrated as per your requirement)
-    const handleColorSelection = (color) => {
-        if (selectedDay) {
-            selectedDay.style.backgroundColor = color;
-            const dateKey = selectedDay.dataset.date;
-            // In a real application, you would save the data back to GitHub using API or manual push
-            console.log(`Selected color for ${dateKey}: ${color}`);
-        }
-    };
 });

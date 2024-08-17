@@ -1,6 +1,6 @@
 // Fetch calendar data from GitHub
 const fetchCalendarData = async () => {
-    const url = 'https://raw.githubusercontent.com/vtmduyen2501/my-planning-calendar/main/calendar.json'; // URL to your JSON file
+    const url = 'https://github.com/vtmduyen2501/mycalendar2024/blob/main/calendar.json'; // URL to your JSON file
     try {
         const response = await fetch(url);
         if (!response.ok) {
